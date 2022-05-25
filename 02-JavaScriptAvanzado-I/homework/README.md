@@ -43,7 +43,7 @@ baz = 2;
 ```javascript
 var instructor = "Tony";
 if(true) {
-    var instructor = "Franco";
+    var instructor = "Franco"; // puede estar en el global y siempre se ejecuta
 }
 console.log(instructor); // "Franco"
 
@@ -87,11 +87,11 @@ console.log(pm); // Franco
 7 / 0 // Infinity
 {}[0] // 
 parseInt("09") // 09
-5 && 2 // T
-2 && 5 // T
+5 && 2 // 2
+2 && 5 // 5
 5 || 0 // 5
 0 || 5 // 5
-[3]+[3]-[10] 
+[3]+[3]-[10] // 23 primero concatena luego resta 10 
 3>2>1  //True
 [] == ![] // 
 ```
@@ -105,8 +105,8 @@ parseInt("09") // 09
 
 ```javascript
 function test() {
-   console.log(a);
-   console.log(foo());
+   console.log(a); //undefined
+   console.log(foo()); // 2
 
    var a = 1;
    function foo() {
@@ -114,7 +114,7 @@ function test() {
    }
 }
 
-test();
+test(); // undefined && 2
 ```
 
 Y el de este código? :
@@ -130,7 +130,7 @@ function getFood(food) {
     return snack;
 }
 
-getFood(false);
+getFood(false); //Undefined porque la var snack hace hoisting.
 ```
 
 
@@ -150,11 +150,11 @@ var obj = {
    }
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname()); // Aurelio De Rosa
 
 var test = obj.prop.getFullname;
 
-console.log(test());
+console.log(test()); // invocas test en el global por lo tanto el this toma el global la respuesta es Juan Perez
 ```
 
 ### Event loop
@@ -169,5 +169,6 @@ function printing() {
    console.log(4);
 }
 
-printing();
+printing(); 
+// 1 4 3 2 
 ```
